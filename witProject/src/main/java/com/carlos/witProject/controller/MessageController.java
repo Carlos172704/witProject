@@ -1,7 +1,7 @@
 package com.carlos.witProject.controller;
 
 import com.carlos.witProject.Rest;
-import org.apache.kafka.common.protocol.Message;
+import com.carlos.witProject.payload.Calc;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,8 +21,8 @@ public class MessageController {
     }
 
     @GetMapping("/get/sum")
-    public ResponseEntity<String> publish(@RequestParam("a") String a, @RequestParam("b")String b){
-        Rest.sendMessage(a);
+    public ResponseEntity<String> publish(Calc data){
+        Rest.sendMessage(data);
         return ResponseEntity.ok("Message sent successfully");
     }
 }
