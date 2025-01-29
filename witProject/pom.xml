@@ -70,5 +70,13 @@
 			</plugin>
 		</plugins>
 	</build>
+	<profiles>
+		<profile>
+			<id>dev</id>
+		</profile>
+		<profile>
+			<id>docker</id>
+		</profile>
+	</profiles>
 
 </project>

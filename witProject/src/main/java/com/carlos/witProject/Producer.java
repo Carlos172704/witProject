@@ -1,21 +1,17 @@
 package com.carlos.witProject;
 
-import com.carlos.witProject.payload.Calc;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.kafka.core.KafkaTemplate;
-import org.springframework.kafka.support.KafkaHeaders;
-import org.springframework.messaging.Message;
-import org.springframework.messaging.support.MessageBuilder;
 import org.springframework.stereotype.Service;
 
 @Service
-public class Rest {
+public class Producer {
 
-    private static final Logger Logger = LoggerFactory.getLogger(Rest.class);
+    private static final Logger Logger = LoggerFactory.getLogger(Producer.class);
     private final KafkaTemplate<String, String> kafkaTemplate;
 
-    public Rest(KafkaTemplate<String, String> kafkaTemplate){
+    public Producer(KafkaTemplate<String, String> kafkaTemplate){
         this.kafkaTemplate = kafkaTemplate;
     }
 

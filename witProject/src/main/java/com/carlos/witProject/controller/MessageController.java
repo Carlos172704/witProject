@@ -1,7 +1,6 @@
 package com.carlos.witProject.controller;
 
-import com.carlos.witProject.Rest;
-import com.carlos.witProject.payload.Calc;
+import com.carlos.witProject.Producer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,16 +12,62 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api")
 public class MessageController {
 
-    private Rest Rest;
+    private Producer Producer;
 
     @Autowired
-    public MessageController(Rest Rest){
-        this.Rest = Rest;
+    public MessageController(Producer Producer){
+        this.Producer = Producer;
     }
 
     @GetMapping("/get/sum")
-    public ResponseEntity<String> publish(@RequestParam("a") String a, @RequestParam("b") String b){
-        Rest.sendMessage(a);
+    public ResponseEntity<String> publishSum(@RequestParam("a") String a, @RequestParam("b") String b){
+        try{
+            double num1 = Double.parseDouble(a);
+            double num2 = Double.parseDouble(b);
+            Producer.sendMessage(String.format("%1$,.2f", num1 + num2));
+        }catch(NumberFormatException e){
+            Producer.sendMessage("The values should be numbers only!");
+        }
+
+        return ResponseEntity.ok("Message sent successfully");
+    }
+    @GetMapping("/get/sub")
+    public ResponseEntity<String> publishSub(@RequestParam("a") String a, @RequestParam("b") String b){
+        try{
+            double num1 = Double.parseDouble(a);
+            double num2 = Double.parseDouble(b);
+            Producer.sendMessage(String.format("%1$,.2f", num1 - num2));
+        }catch(NumberFormatException e){
+            Producer.sendMessage("The values should be numbers only!");
+        }
+
+        return ResponseEntity.ok("Message sent successfully");
+    }
+
+
+    @GetMapping("/get/mult")
+    public ResponseEntity<String> publishMult(@RequestParam("a") String a, @RequestParam("b") String b){
+        try{
+            double num1 = Double.parseDouble(a);
+            double num2 = Double.parseDouble(b);
+            Producer.sendMessage(String.format("%1$,.2f", num1 * num2));
+        }catch(NumberFormatException e){
+            Producer.sendMessage("The values should be numbers only!");
+        }
+
+        return ResponseEntity.ok("Message sent successfully");
+    }
+
+    @GetMapping("/get/div")
+    public ResponseEntity<String> publishDiv(@RequestParam("a") String a, @RequestParam("b") String b){
+        try{
+            double num1 = Double.parseDouble(a);
+            double num2 = Double.parseDouble(b);
+            Producer.sendMessage(String.format("%1$,.2f", num1 / num2));
+        }catch(NumberFormatException e){
+            Producer.sendMessage("The values should be numbers only!");
+        }
+
         return ResponseEntity.ok("Message sent successfully");
     }
 }
