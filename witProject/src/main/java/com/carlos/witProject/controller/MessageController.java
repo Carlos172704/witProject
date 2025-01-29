@@ -21,8 +21,8 @@ public class MessageController {
     }
 
     @GetMapping("/get/sum")
-    public ResponseEntity<String> publish(String data){
-        Rest.sendMessage(data);
+    public ResponseEntity<String> publish(@RequestParam("a") String a, @RequestParam("b") String b){
+        Rest.sendMessage(a);
         return ResponseEntity.ok("Message sent successfully");
     }
 }

@@ -1,6 +1,5 @@
 package com.carlos.witProject;
 
-import com.carlos.witProject.payload.Calc;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.kafka.annotation.KafkaListener;
