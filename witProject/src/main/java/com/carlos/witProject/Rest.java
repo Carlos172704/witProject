@@ -13,16 +13,16 @@ import org.springframework.stereotype.Service;
 public class Rest {
 
     private static final Logger Logger = LoggerFactory.getLogger(Rest.class);
-    private KafkaTemplate<String, Calc> kafkaTemplate;
+    private final KafkaTemplate<String, String> kafkaTemplate;
 
-    public Rest(KafkaTemplate<String, Calc> kafkaTemplate){
+    public Rest(KafkaTemplate<String, String> kafkaTemplate){
         this.kafkaTemplate = kafkaTemplate;
     }
 
-    public void sendMessage(Calc data){
+    public void sendMessage(String data){
 
-        Message<Calc> message= MessageBuilder.withPayload(data).setHeader(KafkaHeaders.TOPIC,"calculator").build();
-        Logger.info(String.format("Message sent -> %s", message));
-        kafkaTemplate.send(message);
+        //Message<Calc> message= MessageBuilder.withPayload(data).setHeader(KafkaHeaders.TOPIC,"calculator").build();
+        Logger.info(String.format("Message sent -> %s", data));
+        kafkaTemplate.send("calculator", data);
     }
 }

@@ -11,7 +11,7 @@ public class Calculator {
     private static final Logger Logger = LoggerFactory.getLogger(Calculator.class);
 
     @KafkaListener(topics = "calculator", groupId = "witGroup")
-    public void consume(Calc message){
+    public void consume(String message){
         Logger.info(String.format("Masage received -> %s", message));
     }
 }
