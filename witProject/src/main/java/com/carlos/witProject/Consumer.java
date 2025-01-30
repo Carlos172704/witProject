@@ -1,9 +1,11 @@
 package com.carlos.witProject;
 
 import jakarta.annotation.PostConstruct;
+import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Value;
+import org.slf4j.MDC;
+
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Service;
 
@@ -12,7 +14,15 @@ public class Consumer {
     private static final Logger Logger = LoggerFactory.getLogger(Consumer.class);
 
     @KafkaListener(topics = "calculator", groupId = "witGroup")
-    public void consume(String message){
-        Logger.info(String.format("Message received -> %s", message));
+    public void consume(ConsumerRecord<String, String> message){
+
+        byte[] requestId = message.headers().lastHeader("X-Request-ID").value();
+        if (requestId != null) {
+            MDC.put("X-Request-ID", new String(requestId));
+        }
+
+        Logger.info(String.format("Message received -> %s", message.value()));
+
+        MDC.clear();
     }
 }

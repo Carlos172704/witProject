@@ -1,9 +1,13 @@
 package com.carlos.witProject;
 
+import org.apache.kafka.clients.producer.ProducerRecord;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.slf4j.MDC;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
+
+import java.util.UUID;
 
 @Service
 public class Producer {
@@ -16,9 +20,15 @@ public class Producer {
     }
 
     public void sendMessage(String data){
+        MDC.put("X-Request-ID", UUID.randomUUID().toString());
 
-        //Message<Calc> message= MessageBuilder.withPayload(data).setHeader(KafkaHeaders.TOPIC,"calculator").build();
+        ProducerRecord<String, String> record = new ProducerRecord<>("calculator", data);
+        record.headers().add("X-Request-ID", MDC.get("X-Request-ID").getBytes());
+        System.out.println(MDC.get("X-Request-ID"));
+
         Logger.info(String.format("Message sent -> %s", data));
-        kafkaTemplate.send("calculator", data);
+        kafkaTemplate.send(record);
+
+        MDC.clear();
     }
 }
