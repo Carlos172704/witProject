@@ -1,22 +1,28 @@
 # Kafka Calculator WIT Challenge
+
 This is the RESTful API that hat provides the basic functionalities of a calculator.
 
-
 # Docker-Desktop
+
 To use this application, [Docker-Desktop](https://www.docker.com) must be installed on your pc
+Make sure Docker is runnning on Ubuntu( for windows, it will be runnning on wsl with ubuntu)
 
 # Usage
+
 Open Docker-Desktop on you computer
 
 Open command line inside witProject folder(you should see the .idea, src, etc. folders, else you should see another witProject folder, open a command on this new one)  
  Run `docker-compose up --build` to run the whole code and install all needed packages
 
 ## Running unit tests
+
 with the project running, open a new command line on the same folder run `docker exec -it springboot-app mvn test`
 
 # Send Requests
-To send a request to the RESTful API,  type `localhost:8080/api/get/{operation}a={value1}&b={value2}`  
+
+To send a request to the RESTful API, type `localhost:8080/api/get/{operation}a={value1}&b={value2}`  
 Change the {operation} to the operation you want to do(`sum` for sum, `sub` for subtraction, `mult` for multiplication, `div` for division), and {value1} and {value2} for the numbers you wanna use the operations on.
 
 ## Made By
+
 Carlos Ferreira
