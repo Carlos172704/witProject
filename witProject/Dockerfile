@@ -2,7 +2,7 @@ FROM openjdk:22-jdk-slim
 
 WORKDIR /app
 
-RUN apt-get update && apt-get install -y telnet && apt-get install -y maven
+RUN apt-get update && apt-get install -y maven
 
 COPY src ./src
 
