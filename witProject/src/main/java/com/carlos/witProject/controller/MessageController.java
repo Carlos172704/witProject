@@ -24,24 +24,28 @@ public class MessageController {
         try{
             double num1 = Double.parseDouble(a);
             double num2 = Double.parseDouble(b);
-            Producer.sendMessage(String.format("%1$,.2f", num1 + num2));
+            double result = num1 + num2;
+            Producer.sendMessage(String.format("%1$,.2f", result));
+            return ResponseEntity.status(200).body(String.format("%1$,.2f", result));
         }catch(NumberFormatException e){
             Producer.sendMessage("The values should be numbers only!");
         }
+        return ResponseEntity.status(400).body("The values should be numbers only!");
 
-        return ResponseEntity.ok("Message sent successfully");
     }
     @GetMapping("/get/sub")
     public ResponseEntity<String> publishSub(@RequestParam("a") String a, @RequestParam("b") String b){
         try{
             double num1 = Double.parseDouble(a);
             double num2 = Double.parseDouble(b);
-            Producer.sendMessage(String.format("%1$,.2f", num1 - num2));
+            double result = num1 - num2;
+            Producer.sendMessage(String.format("%1$,.2f", result));
+            return ResponseEntity.status(200).body(String.format("%1$,.2f", result));
         }catch(NumberFormatException e){
             Producer.sendMessage("The values should be numbers only!");
         }
 
-        return ResponseEntity.ok("Message sent successfully");
+        return ResponseEntity.status(400).body("The values should be numbers only!");
     }
 
 
@@ -50,12 +54,14 @@ public class MessageController {
         try{
             double num1 = Double.parseDouble(a);
             double num2 = Double.parseDouble(b);
-            Producer.sendMessage(String.format("%1$,.2f", num1 * num2));
+            double result = num1 * num2;
+            Producer.sendMessage(String.format("%1$,.2f", result));
+            return ResponseEntity.status(200).body(String.format("%1$,.2f", result));
         }catch(NumberFormatException e){
             Producer.sendMessage("The values should be numbers only!");
         }
 
-        return ResponseEntity.ok("Message sent successfully");
+        return ResponseEntity.status(400).body("The values should be numbers only!");
     }
 
     @GetMapping("/get/div")
@@ -63,11 +69,13 @@ public class MessageController {
         try{
             double num1 = Double.parseDouble(a);
             double num2 = Double.parseDouble(b);
-            Producer.sendMessage(String.format("%1$,.2f", num1 / num2));
+            double result = num1 / num2;
+            Producer.sendMessage(String.format("%1$,.2f", result));
+            return ResponseEntity.status(200).body(String.format("%1$,.2f", result));
         }catch(NumberFormatException e){
             Producer.sendMessage("The values should be numbers only!");
         }
 
-        return ResponseEntity.ok("Message sent successfully");
+        return ResponseEntity.status(400).body("The values should be numbers only!");
     }
 }
