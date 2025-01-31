@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+//controls requests from client
 @RestController
 @RequestMapping("/api")
 public class MessageController {
@@ -19,6 +20,8 @@ public class MessageController {
         this.Producer = Producer;
     }
 
+
+    //handles sum operation, returns result value to client and sends it to kafka
     @GetMapping("/get/sum")
     public ResponseEntity<String> publishSum(@RequestParam("a") String a, @RequestParam("b") String b){
         try{
@@ -33,6 +36,8 @@ public class MessageController {
         return ResponseEntity.status(400).body("The values should be numbers only!");
 
     }
+
+    //handles subtraction operation, returns result value to client and sends it to kafka
     @GetMapping("/get/sub")
     public ResponseEntity<String> publishSub(@RequestParam("a") String a, @RequestParam("b") String b){
         try{
@@ -48,7 +53,7 @@ public class MessageController {
         return ResponseEntity.status(400).body("The values should be numbers only!");
     }
 
-
+    //handles multiplication operation, returns result value to client and sends it to kafka
     @GetMapping("/get/mult")
     public ResponseEntity<String> publishMult(@RequestParam("a") String a, @RequestParam("b") String b){
         try{
@@ -64,6 +69,7 @@ public class MessageController {
         return ResponseEntity.status(400).body("The values should be numbers only!");
     }
 
+    //handles division operation, returns result value to client and sends it to kafka
     @GetMapping("/get/div")
     public ResponseEntity<String> publishDiv(@RequestParam("a") String a, @RequestParam("b") String b){
         try{

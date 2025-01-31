@@ -16,7 +16,7 @@ import java.util.UUID;
 @WebFilter("/*")
 public class RequestResponseFilter extends OncePerRequestFilter {
 
-    public static final String REQUEST_ID_HEADER = "X-Request-ID";
+    public static final String REQUEST_ID_HEADER = "Request-ID";
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
@@ -29,16 +29,13 @@ public class RequestResponseFilter extends OncePerRequestFilter {
             requestId = existingRequestId;
         }
 
-        // Set the request ID in MDC (Mapped Diagnostic Context) for logging purposes
+        // Set the request ID in MDC for logging purposes
         MDC.put(REQUEST_ID_HEADER, requestId);
 
         // Set the X-Request-ID in the response headers
         response.setHeader(REQUEST_ID_HEADER, requestId);
-
-        // Continue the request-response chain
         filterChain.doFilter(request, response);
 
-        // Clear MDC after the response is sent
         MDC.clear();
     }
 }

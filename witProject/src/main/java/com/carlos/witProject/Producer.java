@@ -19,12 +19,13 @@ public class Producer {
         this.kafkaTemplate = kafkaTemplate;
     }
 
+    //send message to kafka with mdc and request id
     public void sendMessage(String data){
-        MDC.put("X-Request-ID", UUID.randomUUID().toString());
+        MDC.put("Request-ID", UUID.randomUUID().toString());
 
         ProducerRecord<String, String> record = new ProducerRecord<>("calculator", data);
-        record.headers().add("X-Request-ID", MDC.get("X-Request-ID").getBytes());
-        System.out.println(MDC.get("X-Request-ID"));
+        record.headers().add("Request-ID", MDC.get("Request-ID").getBytes());
+        System.out.println(MDC.get("Request-ID"));
 
         Logger.info(String.format("Message sent -> %s", data));
         kafkaTemplate.send(record);
