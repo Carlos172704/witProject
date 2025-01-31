@@ -82,7 +82,7 @@ class MessageControllerTest {
         mockMvc.perform(get("/api/get/sum")
                         .param("a", "invalid")
                         .param("b", "5"))
-                .andExpect(status().isOk());
+                .andExpect(status().is(400));
 
         verify(producer, times(1)).sendMessage("The values should be numbers only!");
     }
@@ -92,7 +92,7 @@ class MessageControllerTest {
         mockMvc.perform(get("/api/get/sub")
                         .param("a", "10")
                         .param("b", "invalid"))
-                .andExpect(status().isOk());
+                .andExpect(status().is(400));
 
         verify(producer, times(1)).sendMessage("The values should be numbers only!");
     }
