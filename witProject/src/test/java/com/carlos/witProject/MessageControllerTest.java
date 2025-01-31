@@ -96,4 +96,14 @@ class MessageControllerTest {
 
         verify(producer, times(1)).sendMessage("The values should be numbers only!");
     }
+
+    @Test
+    void testPublishDivWithInvalidNumbers() throws Exception {
+        mockMvc.perform(get("/api/get/div")
+                        .param("a", "10")
+                        .param("b", "0"))
+                .andExpect(status().is(400));
+
+        verify(producer, times(1)).sendMessage("Cannot divide by zero!");
+    }
 }

@@ -14,5 +14,9 @@ Open command line inside witProject folder(you should see the .idea, src, etc. f
 ## Running unit tests
 with the project running, open a new command line on the same folder run `docker exec -it springboot-app mvn test`
 
+# Send Requests
+To send a request to the RESTful API,  type `localhost:8080/api/get/{operation}a={value1}&b={value2}`  
+Change the {operation} to the operation you want to do(`sum` for sum, `sub` for subtraction, `mult` for multiplication, `div` for division), and {value1} and {value2} for the numbers you wanna use the operations on.
+
 ## Made By
 Carlos Ferreira

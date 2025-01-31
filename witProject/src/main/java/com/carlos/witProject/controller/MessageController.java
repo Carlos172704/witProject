@@ -75,6 +75,10 @@ public class MessageController {
         try{
             double num1 = Double.parseDouble(a);
             double num2 = Double.parseDouble(b);
+            if(num2 == 0){
+                Producer.sendMessage("Cannot divide by zero!");
+                return ResponseEntity.status(400).body("Cannot divide by zero!");
+            }
             double result = num1 / num2;
             Producer.sendMessage(String.format("%1$,.2f", result));
             return ResponseEntity.status(200).body(String.format("%1$,.2f", result));
